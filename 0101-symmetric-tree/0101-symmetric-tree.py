@@ -6,37 +6,27 @@
 #         self.right = right
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        if not root:
+        # make a helper function to change either branch to face a different direction
+        # now check for similarity
+        if root is None:
             return True
-        
-        if not root.right and not root.left:
-            return True
-            
-        if not root.left or not root.right:
-            return False
-        
-        def invertTree(node):
-            if not node:
-                return None
-            
-            node.left, node.right = node.right, node.left
-            invertTree(node.left)
-            invertTree(node.right)
 
-            return node
-        
-        
-        
-        def checkSymmetry(a, b):
-            if not a and not b:
+        def helper(nodeA, nodeB):
+            if not nodeA and not nodeB:
                 return True
             
-            if not a or not b:
+            if not nodeA or not nodeB:
                 return False
             
-            if a.val != b.val:
+            if nodeA.val != nodeB.val:
                 return False
             
-            return checkSymmetry(a.left, b.left) and checkSymmetry(a.right, b.right)
+            return (helper(nodeA.right, nodeB.left) and
+            helper(nodeA.left, nodeB.right))
+
         
-        return checkSymmetry(root.left, invertTree(root.right))
+        nodeA = root.left
+        nodeB = root.right
+
+        return helper(nodeA, nodeB)
+
