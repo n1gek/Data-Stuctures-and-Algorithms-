@@ -8,23 +8,22 @@ class Solution:
     def goodNodes(self, root: TreeNode) -> int:
 
         #UMPIRE
+        self.count = 0
 
         def helper(node, curr):
             if not node:
                 return 0
             
             if node.val >= curr:
-                isGood = 1 
-            else:
-                isGood = 0
-
+                self.count += 1
             
             left = helper(node.left, max(curr, node.val))
             right = helper(node.right, max(curr, node.val))
 
-            return isGood + left + right
 
-        return helper(root, root.val)
+        helper(root, root.val)
+
+        return self.count
             
             
 
