@@ -11,10 +11,7 @@ class Solution:
             if not a and not b:
                 return True
             
-            if a and not b:
-                return False
-            
-            elif b and not a:
+            if not a or not b:
                 return False
             
             if a.val != b.val:
