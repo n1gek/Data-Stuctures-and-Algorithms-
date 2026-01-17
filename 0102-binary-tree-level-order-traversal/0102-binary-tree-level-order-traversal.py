@@ -10,23 +10,24 @@ class Solution:
         if not root:
             return []
 
-        que = deque([root])
+        stack = deque([root])
         res = []
 
-        while que:
+        while stack:
             level = []
-            n = len(que)
 
-            for x in range(n):
-                current = que.pop()
-                level.append(current.val)
+            for _ in range(len(stack)):
+                curr = stack.pop()
+                level.append(curr.val)
 
-                if current.left:
-                    que.appendleft(current.left)
-                if current.right:
-                    que.appendleft(current.right)
+                if curr.left:
+                    stack.appendleft(curr.left)
+                if curr.right:
+                    stack.appendleft(curr.right)
+            
             res.append(level)
         
         return res
+
 
         
