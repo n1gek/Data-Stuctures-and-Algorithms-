@@ -10,13 +10,19 @@ class Solution:
         def helper(a, b):
             if not a and not b:
                 return True
-            if not a or not b:
+            
+            if a and not b:
                 return False
+            
+            elif b and not a:
+                return False
+            
             if a.val != b.val:
                 return False
             
-            
-            return helper(a.left, b.left) and helper(a.right, b.right)
+            left = helper(a.left, b.left)
+            right = helper(a.right, b.right)
+
+            return left and right
         
         return helper(p, q)
-        
