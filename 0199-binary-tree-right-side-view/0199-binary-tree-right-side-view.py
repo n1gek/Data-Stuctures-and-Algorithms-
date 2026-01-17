@@ -7,27 +7,32 @@
 from collections import deque
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+
         if not root:
             return []
-
+        
         stack = deque([root])
+
         res = []
 
         while stack:
-            n = len(stack)
+            length = len(stack)
 
-            for i in range(n):
-                curr = stack.popleft()
-                if i == n -1:
+            for i in range(len(stack)):
+                curr = stack.pop()
+
+                if i == length - 1:
                     res.append(curr.val)
                 
                 if curr.left:
-                    stack.append(curr.left)
+                    stack.appendleft(curr.left)
                 if curr.right:
-                    stack.append(curr.right)
+                    stack.appendleft(curr.right)
         
         return res
 
+                
 
 
-    
+
+
