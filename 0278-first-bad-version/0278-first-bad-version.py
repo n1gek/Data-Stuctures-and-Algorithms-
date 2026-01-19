@@ -14,7 +14,7 @@ class Solution:
             if isBadVersion(mid): #if True: Falted, search left half
                 right = mid - 1
             else:
-                left = mid + 1
+                left = mid + 1 # first to the right after the good one
             
         
         return left
