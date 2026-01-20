@@ -1,23 +1,23 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        res = nums[0]
 
-        left, right = 0, len(nums) - 1
+        left = 0
+        right = len(nums) - 1
 
-        while left <= right:
-            # if nums[left] < nums[right]: means arr is sorted
-            # if nums[left] < nums[mid]: means left to mid sorted ascending, look left
-            # else: look right
-            if nums[left] < nums[right]:
-                res = min(res, nums[left])
-                break
-            
+        while left < right: # searching for a boundary, peak, or minimum index
+
             mid = (left + right) // 2
-            res = min(res, nums[mid])
 
-            if nums[left] <= nums[mid]:
+            if nums[mid] > nums[right]: #
                 left = mid + 1
             else:
-                right = mid - 1
+                right = mid
+        
+        return nums[left]
+
+
             
-        return res
+
+
+            
+        
