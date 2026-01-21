@@ -8,27 +8,26 @@ class Node:
 from typing import Optional
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        
         if not node:
             return node
         
         visited = {}
         q = deque([node])
-        visited[node] = Node(node.val, []) # make a copy the current node
+        visited[node] = Node(node.val, [])
 
         while q:
             current = q.popleft()
 
-            for neighbor in current.neighbors:
-                if neighbor not in visited:
-                    # make a copy of this node
-                    visited[neighbor] = Node(neighbor.val, [])
-                    q.append(neighbor)
+            for n in current.neighbors:
+                if n not in visited:
+                    visited[n] = Node(n.val, [])
+                    q.append(n)
                 
-                clone_current = visited[current] # accesses the current clone
-                cloned_neighbor = visited[neighbor] # accesses the neighbors of the original
-                clone_current.neighbors.append(cloned_neighbor) # add the cloned node type as a node
+                current_clone = visited[current]
+                cloned_neighbor = visited[n]
+                current_clone.neighbors.append(cloned_neighbor)
         
+
+
         return visited[node]
-        
-
-
