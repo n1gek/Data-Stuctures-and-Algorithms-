@@ -1,21 +1,26 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         # sort the intervals based off the starting time
-
         intervals.sort(key=lambda x: x[0])
+        # conditions for merging
+        #1 if the second starting time <= first ending time
+        #2 
 
-        res = [intervals[0]]
+        stack = []
 
-        for i in range(1, len(intervals)):
-            s, e = intervals[i]
-
-            prevS, prevE = res[-1]
-
-            if prevE >= s:
-                res.pop()
-                res.append([prevS, e])
+        for ival in intervals:
+            if not stack:
+                stack.append(ival)
             else:
-                res.append(intervals[i])
+            
+                start, end = stack[-1] #[0, 0]
+                currStart, currEnd = ival #[1, 4]
+
+                if currStart <= end:
+                    newVal = [min(start, currStart), max(end, currEnd)]
+                    stack.pop()
+                    stack.append(newVal)
+                else:
+                    stack.append(ival)
         
-        print(res)
-        return res
+        return stack
