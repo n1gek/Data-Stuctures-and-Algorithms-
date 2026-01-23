@@ -2,17 +2,21 @@ from collections import Counter
 import heapq
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        # user a counter to count the elements
         count = Counter(nums)
+        vals = []
+        # {1:3, 2:2, 3:1}
 
-        nums = [(-freq, val) for val, freq in count.items()]
-
-        heapq.heapify(nums)
-
+        for key, count in count.items():
+            vals.append((-count, key))
+        
+        heapq.heapify(vals)
+        print(vals)
+        
         res = []
-
-        for _ in range(k):
-            freq, val = heapq.heappop(nums)
-            res.append(val)
-
+        for i in range(k):
+            val = heapq.heappop(vals)
+            res.append(val[1])
+        
         return res
+
+
