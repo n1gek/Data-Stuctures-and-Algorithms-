@@ -1,6 +1,6 @@
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
-        
+
         for num in nums:
             index = abs(num) - 1
             nums[index] = abs(nums[index]) * -1
@@ -8,9 +8,11 @@ class Solution:
         print(nums)
         res = []
 
-        for i, num in enumerate(nums):
-            if num > 0:
-                n = i + 1
-                res.append(n)
+        for i, n in enumerate(nums):
+            if n > 0:
+                num = i + 1
+                res.append(num)
         
         return res
+
+        
