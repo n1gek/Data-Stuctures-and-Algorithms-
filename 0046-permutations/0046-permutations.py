@@ -2,17 +2,18 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         
         res = []
-        def helper(arr, index):
+
+        def helper(arr):
             if len(arr) == len(nums):
                 res.append(arr[:])
                 return
             
-            for i in range(len(nums)):
-                if nums[i] not in arr:
-                    arr.append(nums[i])
-                    helper(arr, index + 1)
+            for num in nums:
+                if num not in arr:
+                    arr.append(num)
+                    helper(arr)
                     arr.pop()
-            
         
-        helper([], 0)
+        helper([])
+
         return res
